@@ -1,33 +1,188 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+<h1 class="titleS">Auto Flipper</h1>
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+      <div class="sizing"></div>
+      <div class="container">
+        <div class="search">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleSelect1" class="nameSearch">Make</label>
+                <select class="form-control" id="exampleSelect1">
+                  <option selected>Make</option>
+                  {{#each vehicle}}
+                  <option id="btnmake" data-id={{this.make}}>{{this.make}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleSelect1" class="nameSearch">Model</label>
+                <select class="form-control" id="exampleSelect1">
+                  <option selected>Model</option>
+                  {{#each vehicle}}
+                  <option id="btnmodel" data-id={{this.model}}>{{this.model}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleSelect1" class="nameSearch">Year</label>
+                <select class="form-control" id="exampleSelect1">
+                  <option selected>Year</option>
+                  {{#each vehicle}}
+                  <option id="btnyear" data-id={{this.year}}>{{this.year}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleSelect1" class="nameSearch">Price</label>
+                <select class="form-control" id="exampleSelect1">
+                  <option selected>Price</option>
+                  <option data-id=5000>"5,000"</option>
+                  <option data-id=10000>10,000</option>
+                  <option data-id=15000>15,000</option>
+                  <option data-id=20000>20,000</option>
+                  <option data-id=25000>25,000</option>
+                  <option data-id=30000>30,000</option>
+                  <option data-id=35000>35,000</option>
+                  <option data-id=40000>40,000</option>
+                  <option data-id=45000>45,000</option>
+                  <option data-id=50000>50,000</option>
+                  <option data-id=55000>55,000</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleSelect1" class="nameSearch">Price</label>
+                <select class="form-control" id="exampleSelect1">
+                  <option selected>Price</option>
+                  <option data-id=5000>5,000</option>
+                  <option data-id=10000>10,000</option>
+                  <option data-id=15000>15,000</option>
+                  <option data-id=20000>20,000</option>
+                  <option data-id=25000>25,000</option>
+                  <option data-id=30000>30,000</option>
+                  <option data-id=35000>35,000</option>
+                  <option data-id=40000>40,000</option>
+                  <option data-id=45000>45,000</option>
+                  <option data-id=50000>50,000</option>
+                  <option data-id=55000>55,000></option>
+                </select>
+              </div>
+
+            </div>
+
           </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+
+          <div class="row">
+
+
+            <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+
+        </div>
       </div>
+
     </div>
+
   </div>
+
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+<div class="comtainer"></div>
+<form action="POST">
+  <div class="row">
+    <label>What type of Vehicle</label>
+    <input type="text" id="typeV">
+  </div>
+  <div class="row">
+    <label>What Make</label>
+    <input type="text" id="typeMake">
+  </div>
+  <div class="row">
+    <label> What model</label>
+    <input type="text" id="typeModel">
+  </div>
+  <div class="row">
+    <label>Price</label>
+    <input type="text" id="typeYear">
+  </div>
+  <div class="row">
+    <label>Year</label>
+    <input type="text" id="typeYear">
+  </div>
+  <div class="row">
+    <label>Description of Vehicle</label>
+    <textarea id="typeDes"></textarea>
+  </div>
+  <div class="row">
+    <label>Add vehicle to your list</label>
+    <input type="submit" id="submit">
+  </div>
+</form>
+
+<div class="container">
+
+  {{#each vehicle}}
+  <div class="row itemH">
+    <div class="col">
+      <h5 class="mmpStyle">{{this.make}} : {{this.model}} {{this.price}}</h5>
+      <p class="decript">{{this.decription}}</p>
+    </div>
+    <div class="col"></div>
+  </div>
+  {{/each}}
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      <span id="dropName">Model</span>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {{#each vehicle}}
+      <button class="dropdown-item" type="button" data-id="{{this.make}}" id="btnMake">{{this.make}}</button>
+      {{/each}}
+    </div>
+  </div>
+
+
+
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="/js/index.js"></script>
