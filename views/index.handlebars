@@ -1,9 +1,12 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"/>
+
 <div class="dropdownMenus col-md-12">
   <div class='form-field'>
     <label for='brandFilter'>Make</label>
-    <select id='brandFilter' class='form-control'>
-      <option>Choose brand</option>
+    <select onchange=
+    "brandFunction()">
+   
+      <option>Choose Make</option>
       {{#each shoes}}
       <option value="{{this}}">{{this.brand}}</option>
       {{/each}}

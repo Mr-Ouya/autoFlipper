@@ -58,7 +58,24 @@ var refreshExamples = function() {
     $exampleList.append($examples);
   });
 };
+function makeFunction() {
+  
+     $.ajax({
+     
+      type: "GET",
+      url: "api/examples",
+      data: JSON.stringify(example)
+    });
+  }
 
+//When there is a change load database info for model
+function modelFunction() {
+
+}
+
+function priceFunction() {
+
+}
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
