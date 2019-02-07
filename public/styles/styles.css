@@ -1,3 +1,40 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+.resultbox {
+  height: 300px;
+  width: 100%;
+  margin: 40px;
+  border: solid gray;
+  margin: 60px;
+  border-width: 2px;
+
+}
+
+.titleS {
+
+  text-align: center;
+}
+
+.search {
+
+  height: 400px;
+}
+
+.itemH {
+  height: 200px;
+  border: ridge;
+  margin: 30px 0px;
+
+}
+
+.makeS {
+  font-size: 50px;
+}
+
+.modeS {}
+
+.priceS {}
+
+.descS {}
