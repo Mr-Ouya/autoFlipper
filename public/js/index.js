@@ -13,40 +13,14 @@ var modSea = $("#btnmodel");
 var makeSea = $("#btnmake");
 var yearSea = $("#btnyear")
 var priceSea = $("#btnprice");
+var optionMake = $(".newoptions");
 
 
 //objectVehicle
 
-var popularVehicle = ["Ford", "Toyoto", "Honda", "Nissan", "Chevrolet", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz", "BMW", "Dodge"];
+popularVehicle = ["Ford", "Toyoto", "Honda", "Nissan", "Chevrolet", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz", "BMW", "Dodge"];
 
-
-function callmake() {
-  $.ajax({
-    url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/honda?format=json",
-    success: function (result) {
-      //manually set up a append option likes orginally do for each statment is needed
-      console.log(result)
-
-
-    }
-  })
-}
-
-callmake();
-
-
-$("button").click(function () {
-  $.ajax({
-    url: "demo_test.txt",
-    success: function (result) {
-      $("#div1").html(result);
-    }
-  });
-});
-///////
-
-
-// The API object contains methods for each kind of request we'll make
+////////////
 var API = {
   saveOne: function (example) {
     return $.ajax({
@@ -84,6 +58,66 @@ var API = {
     });
   }
 };
+
+
+
+
+////////////
+
+
+
+
+
+
+function popFirstItem() {
+
+  var firstdrop = $("#makeSelect1");
+
+  for (var i = 0; i < popularVehicle.length; i++) {
+
+    var newSelect = $("<option></option").text(popularVehicle[i]);
+
+    newSelect.val(popularVehicle[i]);
+
+    newSelect.addClass("newoptions");
+
+    newSelect.data(popularVehicle[i]);
+
+    newSelect.onclick = popnewItems;
+
+    firstdrop.append(newSelect);
+
+  }
+
+}
+
+popFirstItem();
+
+
+var popnewItems = function (event) {
+  event.preventDefault();
+  console.log("hi");
+}
+
+
+function callmake(make) {
+  $.ajax({
+    url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/" + make + "?format=json",
+    success: function (result) {
+      //manually set up a append option likes orginally do for each statment is needed
+      console.log(result)
+    }
+  })
+}
+
+
+
+
+///////
+
+
+// The API object contains methods for each kind of request we'll make
+
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshData = function () {
@@ -170,6 +204,10 @@ var searchDatabase = function () {
 }
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
+$("body").on('click', ".newoptions", function (e) {
+  console.log("hi");
+});
+
 submitSearch.on("click", searchDatabase);
 //$exampleList.on("click", ".delete", handleDeleteBtnClick);
 //get all content from database

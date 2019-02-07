@@ -1,5 +1,5 @@
-var Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
+
   var Vehicle = sequelize.define("vehicle", {
     id: {
       type: DataTypes.INTEGER,
@@ -31,10 +31,17 @@ module.exports = function (sequelize, DataTypes) {
     year: {
       type: DataTypes.INTEGER(4),
       null: false
+    },
+    img: {
+      type: DataTypes.BLOB,
+
     }
 
 
 
   });
+
   return Vehicle;
+
+
 };
