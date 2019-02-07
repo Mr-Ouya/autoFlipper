@@ -7,11 +7,12 @@ var path = require('path');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'phplogin'
+    password: 'root',
+    database: 'user_db'
 });
 
 var app = express();
+var PORT = 3000;
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -55,4 +56,6 @@ app.get('/home', function (request, response) {
     response.end();
 });
 
-app.listen(3000);
+app.listen(PORT, function () {
+    console.log("App listening on PORT: " + PORT);
+});
