@@ -14,12 +14,13 @@ var makeSea = $("#btnmake");
 var yearSea = $("#btnyear")
 var priceSea = $("#btnprice");
 var optionMake = $(".newoptions");
-
-
+var select1Make = $("#makeSelect1")
+var selectModel = $("#modelSelect1")
+var modelNames = [];
 //objectVehicle
 
-popularVehicle = ["Ford", "Toyoto", "Honda", "Nissan", "Chevrolet", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz", "BMW", "Dodge"];
-
+popularVehicle = ["ford", "toyoto", "honda", "nissan", "Chevrolet", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz", "BMW", "Dodge"];
+years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
 ////////////
 var API = {
   saveOne: function (example) {
@@ -69,34 +70,64 @@ var API = {
 
 
 
-function popFirstItem() {
+function popFirstItem(select, data) {
+  console.log(select);
+  var firstdrop = select;
 
-  var firstdrop = $("#makeSelect1");
+  for (var i = 0; i < data.length; i++) {
+    console.log(data);
+    var newSelect = $("<option></option").text(data[i]);
 
-  for (var i = 0; i < popularVehicle.length; i++) {
+    newSelect.val(data[i]);
 
-    var newSelect = $("<option></option").text(popularVehicle[i]);
-
-    newSelect.val(popularVehicle[i]);
 
     newSelect.addClass("newoptions");
 
-    newSelect.data(popularVehicle[i]);
+    newSelect.data(data[i]);
 
     newSelect.onclick = popnewItems;
-
+    //console.log(newSelect.val());
     firstdrop.append(newSelect);
-
   }
 
 }
 
-popFirstItem();
+
+function popItems(select, data) {
+  console.log(data[1]);
+  var firstdrop = select;
+
+  for (var i = 0; i < data.length; i++) {
+    console.log(data);
+    var newSelect = $("<option></option").text(data[i]);
+
+    newSelect.val(data[i]);
+
+    newSelect.addClass("newoptions");
+
+    newSelect.data(data[i]);
+
+    newSelect.onclick = popnewItems;
+    console.log(newSelect.val());
+    firstdrop.append(newSelect);
+  }
+
+}
 
 
-var popnewItems = function (event) {
-  event.preventDefault();
-  console.log("hi");
+popFirstItem(select1Make, popularVehicle);
+
+
+var popnewItems = function () {
+  var make = $(this).val();
+  console.log(make)
+
+  console.log(modelNames);
+  var makedata = callmake(make);
+  console.log(makedata)
+
+  popItems(selectModel, modelNames);
+  popItems(selectYear)
 }
 
 
@@ -105,7 +136,18 @@ function callmake(make) {
     url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/" + make + "?format=json",
     success: function (result) {
       //manually set up a append option likes orginally do for each statment is needed
-      console.log(result)
+
+
+      for (var i = 0; i < result.Results.length; i++) {
+
+        // console.log(result.Results[i].Model_Name);
+
+        model = result.Results[i].Model_Name;
+        modelNames.push(model);
+      }
+
+      //console.log(modelNames);
+      return modelNames
     }
   })
 }
@@ -204,9 +246,7 @@ var searchDatabase = function () {
 }
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$("body").on('click', ".newoptions", function (e) {
-  console.log("hi");
-});
+$("#makeSelect1").on("change", optionMake, popnewItems)
 
 submitSearch.on("click", searchDatabase);
 //$exampleList.on("click", ".delete", handleDeleteBtnClick);
