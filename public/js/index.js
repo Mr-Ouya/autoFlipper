@@ -250,16 +250,7 @@ var searchDatabase = function () {
 
 
 
-  var newSeach = {
 
-    make = select1Make.val(),
-    model = select1Make.val(),
-    MinP = priceMin.val(),
-    MaxP = priceMax.val(),
-    MinY = yearMin.val(),
-    MaxY = yearMax.val()
-
-  }
   if (!(newSeach.make && newSeach.make && newSeach.make, newSeach.make, newSeach.make, newSeach.make)) {
     alert("Enter information");
     return;
