@@ -25,6 +25,7 @@ var modelNames = [];
 
 popularVehicle = ["BMW", "Chevrolet", "Dodge", "Ford", "GMC", "Hyundai", "Jeep", "Toyoto", "Honda", "Nissan", "Ram", "KIA", "Subaru", "Mazada", "Mercedes_Benz", "Volksvagen"];
 years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"]
+price = ["1000", "5000", "10000", "15000", "20000", "25000", "30000", "35000", "40000", "45000", "50000", "55000", "60000", "65000", "70000", "75000"]
 ////////////
 var API = {
   saveOne: function (example) {
@@ -40,12 +41,6 @@ var API = {
   getAll: function () {
     return $.ajax({
       url: "api/vehicle",
-      type: "GET"
-    });
-  },
-  getMake: function () {
-    return $.ajax({
-      url: "api/vehicle/" + make,
       type: "GET"
     });
   },
@@ -108,7 +103,6 @@ function popFirstItem(select, data) {
 
 function popItems(select, data) {
   // dropdownEnable()
-
   var firstdrop = select;
   console.log(data);
   for (var i = 0; i < data.length; i++) {
@@ -142,7 +136,11 @@ var popnewItems = function () {
     console.log(make)
 
     popItems(selectModel, modelNames);
-    popItems(selectYear, years)
+    popItems(selectMin, price);
+    popItems(selectMax, price);
+    popItems(selectMaxY, years);
+    popItems(selectMinY, years);
+
 
   });
 
@@ -240,15 +238,45 @@ var searchDatabase = function () {
 
   console.log(select1Make.val());
   console.log(selectModel.val());
-  console.log(selectYear.val());
+  console.log(selectMaxY.val());
+  console.log(selectMinY.val());
   console.log(selectMin.val());
   console.log(selectMax.val());
 
-  API.getAll({
+  var yearMin = parseInt(selectMinY);
+  var yearMax = parseInt(selectMaxY);
+  var priceMin = parseInt(selectMin);
+  var priceMax = parseInt(selectMax);
 
-  })
 
 
+  var newSeach = {
+
+    make = select1Make.val(),
+    model = select1Make.val(),
+    MinP = priceMin.val(),
+    MaxP = priceMax.val(),
+    MinY = yearMin.val(),
+    MaxY = yearMax.val()
+
+  }
+  if (!(newSeach.make && newSeach.make && newSeach.make, newSeach.make, newSeach.make, newSeach.make)) {
+    alert("Enter information");
+    return;
+  } else {
+
+    API.getAll(newSeach).then(function (data) {
+
+      console.log("searching");
+
+    })
+
+
+
+
+
+
+  }
 }
 
 function dropdownEnable() {

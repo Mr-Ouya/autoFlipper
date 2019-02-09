@@ -28,6 +28,10 @@ module.exports = function (app) {
   app.get("*", function (req, res) {
     res.render("404");
   });
+  app.get("/text", function (req, res) {
+    res.render("indexTest");
+  });
+
 
 
   app.get("/register", function (req, res) {

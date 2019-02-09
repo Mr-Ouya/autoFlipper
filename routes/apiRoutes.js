@@ -24,9 +24,8 @@ module.exports = function (app) {
 
     });
   });
-  app.get("/api/vehicle/:make/:model", function (req, res) {
+  app.get("api/vehicle/:make/:model/yearmin/yearmax/pricemin/pricemax", function (req, res) {
 
-    var make = req.params.model;
     db.vehicle.findAll({
       where: {
 
