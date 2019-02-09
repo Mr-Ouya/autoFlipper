@@ -37,7 +37,6 @@
               <div class="form-group">
                 <label for="exampleSelect1" class="nameSearch">Make</label>
                 <select class="form-control" id="makeSelect1">
-                  <option selected>Make</option>
                 </select>
               </div>
             </div>
@@ -45,9 +44,21 @@
               <div class="form-group">
                 <label for="exampleSelect1" class="nameSearch">Model</label>
                 <select class="form-control" id="modelSelect1">
-                  <option selected>Model</option>
+                  <-- <option selected>Model</option> !-->
+                    {{#each vehicle}}
+                    <option id="btnmodel" data-id={{this.model}}>{{this.model}}</option>
+                    {{/each}}
+                </select>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleSelect1" class="nameSearch">Year</label>
+                <select class="form-control" id="yearminSelect1">
+                  <option selected>Year</option>
                   {{#each vehicle}}
-                  <option id="btnmodel" data-id={{this.model}}>{{this.model}}</option>
+                  <option id="btnyear" data-id={{this.year}}>{{this.year}}</option>
                   {{/each}}
                 </select>
               </div>
@@ -56,7 +67,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="exampleSelect1" class="nameSearch">Year</label>
-                <select class="form-control" id="exampleSelect1">
+                <select class="form-control" id="yearmaxSelect1">
                   <option selected>Year</option>
                   {{#each vehicle}}
                   <option id="btnyear" data-id={{this.year}}>{{this.year}}</option>
@@ -67,9 +78,9 @@
             <div class="col">
               <div class="form-group">
                 <label for="exampleSelect1" class="nameSearch">Price</label>
-                <select class="form-control" id="exampleSelect1">
+                <select class="form-control" id="minSelect1">
                   <option selected>Price</option>
-                  <option data-id=5000>"5,000"</option>
+                  <option data-id=5000>5,000</option>
                   <option data-id=10000>10,000</option>
                   <option data-id=15000>15,000</option>
                   <option data-id=20000>20,000</option>
@@ -88,7 +99,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="exampleSelect1" class="nameSearch">Price</label>
-                <select class="form-control" id="exampleSelect1">
+                <select class="form-control" id="maxSelect1">
                   <option selected>Price</option>
                   <option data-id=5000>5,000</option>
                   <option data-id=10000>10,000</option>

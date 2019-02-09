@@ -16,11 +16,15 @@ var priceSea = $("#btnprice");
 var optionMake = $(".newoptions");
 var select1Make = $("#makeSelect1")
 var selectModel = $("#modelSelect1")
+var selectMinY = $("#yearminSelect1");
+var selectMaxY = $("#yearmaxSelect1");
+var selectMin = $("#minSelect1");
+var selectMax = $("#maxSelect1");
 var modelNames = [];
 //objectVehicle
 
 popularVehicle = ["ford", "toyoto", "honda", "nissan", "Chevrolet", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz", "BMW", "Dodge"];
-years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"]
 ////////////
 var API = {
   saveOne: function (example) {
@@ -65,13 +69,21 @@ var API = {
 
 ////////////
 
+$(document).ready(function () {
 
+  selectModel.prop("disabled", true)
+  selectYear.prop("disabled", true)
+  selectMin.prop("disabled", true)
+  selectMax.prop("disabled", true)
+})
 
+popFirstItem(select1Make, popularVehicle);
 
 
 
 function popFirstItem(select, data) {
   console.log(select);
+
   var firstdrop = select;
 
   for (var i = 0; i < data.length; i++) {
@@ -94,11 +106,11 @@ function popFirstItem(select, data) {
 
 
 function popItems(select, data) {
-  console.log(data[1]);
-  var firstdrop = select;
+  // dropdownEnable()
 
+  var firstdrop = select;
+  console.log(data);
   for (var i = 0; i < data.length; i++) {
-    console.log(data);
     var newSelect = $("<option></option").text(data[i]);
 
     newSelect.val(data[i]);
@@ -108,30 +120,38 @@ function popItems(select, data) {
     newSelect.data(data[i]);
 
     newSelect.onclick = popnewItems;
-    console.log(newSelect.val());
     firstdrop.append(newSelect);
   }
 
 }
 
 
-popFirstItem(select1Make, popularVehicle);
 
 
 var popnewItems = function () {
+  dropdownEnable()
   var make = $(this).val();
+
+
   console.log(make)
 
   console.log(modelNames);
-  var makedata = callmake(make);
-  console.log(makedata)
+  callmake(make, function (make) {
 
-  popItems(selectModel, modelNames);
-  popItems(selectYear)
+    console.log(make)
+
+    popItems(selectModel, modelNames);
+    popItems(selectYear, years)
+
+  });
+
+
+
 }
 
 
-function callmake(make) {
+
+function callmake(make, cb) {
   $.ajax({
     url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/" + make + "?format=json",
     success: function (result) {
@@ -147,7 +167,8 @@ function callmake(make) {
       }
 
       //console.log(modelNames);
-      return modelNames
+
+      cb(modelNames);
     }
   })
 }
@@ -164,30 +185,8 @@ function callmake(make) {
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshData = function () {
   API.getAll().then(function (data) {
-    var $newitem = data.map(function (example) {
-      var $a = $("<a>")
-        .text(data)
-        .attr("href", "/example/" + example.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": data
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($newitem);
-  });
+  })
 };
 
 // handleFormSubmit is called whenever we submit a new example
@@ -236,14 +235,30 @@ var handleDeleteBtnClick = function () {
 //ajax call to api with models, make , year
 
 var searchDatabase = function () {
-  var selectedText = $(this).find("option:selected").text();
+  //var selectedText = $(this).find("option:selected").text();
 
-  console.log(makeSea.text(selectedText))
-  console.log(modSea.text(selectedText))
-  console.log(yearSea.text(selectedText))
+  console.log(select1Make.val());
+  console.log(selectModel.val());
+  console.log(selectYear.val());
+  console.log(selectMin.val());
+  console.log(selectMax.val());
+
+  API.getAll({
+
+  })
 
 
 }
+
+function dropdownEnable() {
+  selectModel.prop("disabled", false)
+  selectYear.prop("disabled", false)
+  selectMin.prop("disabled", false)
+  selectMax.prop("disabled", false)
+}
+
+
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $("#makeSelect1").on("change", optionMake, popnewItems)
