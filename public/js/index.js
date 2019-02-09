@@ -23,7 +23,7 @@ var selectMax = $("#maxSelect1");
 var modelNames = [];
 //objectVehicle
 
-popularVehicle = ["ford", "toyoto", "honda", "nissan", "Chevrolet", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz", "BMW", "Dodge"];
+popularVehicle = ["BMW", "Chevrolet", "Dodge", "Ford", "Toyoto", "Honda", "Nissan", "Hyundai", "Ram", "Volksvagen", "GMC", "KIA", "Jeep", "Subaru", "Mazada", "Mercedes_Benz"];
 years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"]
 ////////////
 var API = {
@@ -72,6 +72,7 @@ var API = {
 $(document).ready(function () {
 
   selectModel.prop("disabled", true)
+  select.prop("disabled", true)
   selectYear.prop("disabled", true)
   selectMin.prop("disabled", true)
   selectMax.prop("disabled", true)
