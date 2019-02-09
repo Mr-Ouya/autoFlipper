@@ -250,7 +250,6 @@ var searchDatabase = function () {
 
 
 
-
   if (!(newSeach.make && newSeach.make && newSeach.make, newSeach.make, newSeach.make, newSeach.make)) {
     alert("Enter information");
     return;
