@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
       null: false
     },
     price: {
-      type: DataTypes.FLOAT(8),
+      type: DataTypes.INTEGER(8),
       null: false
     },
     description: {

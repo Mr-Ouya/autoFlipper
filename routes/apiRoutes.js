@@ -1,4 +1,6 @@
 var db = require("../models");
+var Sequelize = require("sequelize");
+var Op = Sequelize.Op;
 
 module.exports = function (app) {
   // Get all examples
@@ -24,16 +26,28 @@ module.exports = function (app) {
 
     });
   });
-  app.get("api/vehicle/:make/:model/yearmin/yearmax/pricemin/pricemax", function (req, res) {
+  app.get("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
+    console.log(req.params + "hello")
+    //console.log(req.body);
+
 
     db.vehicle.findAll({
-      where: {
 
-        model: model,
-        make: make
+      where: {
+        model: req.params.model,
+        make: req.params.make,
+        year: {
+          [Op.between]: [req.params.yearmin, req.params.yearmax]
+        },
+        price: {
+          [Op.between]: [req.params.pricemin, req.params.pricemax]
+        }
+
       }
-    }).then(function (dbExamples) {
-      res.json(dbExamples);
+
+    }).then(function (data) {
+      res.json(data);
+      console.log(data);
     });
   });
 
