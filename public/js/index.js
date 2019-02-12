@@ -23,7 +23,7 @@ var selectMax = $("#maxSelect1");
 var modelNames = [];
 //objectVehicle
 
-popularVehicle = ["BMW", "Chevrolet", "Dodge", "Ford", "GMC", "Hyundai", "Jeep", "Toyoto", "Honda", "Nissan", "Ram", "KIA", "Subaru", "Mazada", "Mercedes_Benz", "Volksvagen"];
+popularVehicle = ["BMW", "Chevrolet", "Dodge", "Ford", "GMC", "Hyundai", "Jeep", "Toyota", "Honda", "Nissan", "Ram", "KIA", "Subaru", "Mazada", "Mercedes_Benz", "Volksvagen"];
 years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"]
 price = ["1000", "5000", "10000", "15000", "20000", "25000", "30000", "35000", "40000", "45000", "50000", "55000", "60000", "65000", "70000", "75000"]
 ////////////
@@ -120,6 +120,8 @@ function popFirstItem(select, data) {
 function popItems(select, data) {
   // dropdownEnable()
   var firstdrop = select;
+
+  firstdrop.empty();
   console.log(data);
   for (var i = 0; i < data.length; i++) {
     var newSelect = $("<option></option").text(data[i]);
@@ -172,7 +174,7 @@ function callmake(make, cb) {
     success: function (result) {
       //manually set up a append option likes orginally do for each statment is needed
 
-
+      modelNames = [];
       for (var i = 0; i < result.Results.length; i++) {
 
         // console.log(result.Results[i].Model_Name);

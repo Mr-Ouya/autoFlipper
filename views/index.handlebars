@@ -14,13 +14,9 @@
         <a class="nav-link" href="#">Link</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 
@@ -38,8 +34,6 @@
                 <label for="exampleSelect1" class="nameSearch">Make</label>
                 <select class="form-control" id="makeSelect1">
                   <option selected>Make</option>
-
-
                 </select>
               </div>
             </div>
@@ -84,14 +78,19 @@
                 <label for="exampleSelect1" class="nameSearch">Price</label>
                 <select class="form-control" id="maxSelect1">
                   <option selected>Price</option>
+
+                  <div> class="row" class="submitstyle">
+                    <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
+                  </div>
               </div>
             </div>
-          </div>
-          <div class="row" class="submitstyle">
-            <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
+
+
           </div>
 
+
         </div>
+
       </div>
 
     </div>
@@ -99,8 +98,8 @@
   </div>
 
 </div>
-
-<div class="comtainer"></div>
+<div class="comtainer">
+</div>
 <form action="POST">
   <div class="row">
     <label>What type of Vehicle</label>
@@ -143,20 +142,12 @@
     <div class="col"></div>
   </div>
   {{/each}}
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      <span id="dropName">Model</span>
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {{#each vehicle}}
-      <button class="dropdown-item" type="button" data-id="{{this.make}}" id="btnMake">{{this.make}}</button>
-      {{/each}}
-    </div>
-  </div>
+
+</div>
+</div>
+</div>
 
 
 
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="/js/index.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
