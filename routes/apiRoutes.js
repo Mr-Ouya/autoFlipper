@@ -27,37 +27,113 @@ module.exports = function (app) {
     });
   });
   app.get("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
-    console.log(req.params + "hello")
+    console.log(req.params)
     //console.log(req.body);
+    var yearA;
+    var yearB;
+    var priceA;
+    var priceB;
     let whereClause = {
 
     }
+    console.log(yearA, yearB, priceA, priceB)
 
     //Check if Make has been selected 
-    if (req.params.make === null) {} else {
-
-      whereClause.model = req.params.make;
-
-    }
-    if (req.params.make.length == 0) {
+    if (req.params.make === "Make") {
       res.status(404).json({
         error: 'Make has not been selected'
       })
-    }
+    } else {
 
-    if (req.params.model) {
+      whereClause.make = req.params.make;
+      // return whereClause.model;
+
+    }
+    ///////////////////
+    if (req.params.model === "Model") {} else {
       whereClause.model = req.params.model;
+
+      //return whereClause.model;
     }
-
-    if (req.params.yearmin) {
-      whereClause.model = req.params.make;
-    }
+    /////////////////////
 
 
 
-    if (req.params.model) {
-      whereClause.model = req.params.model;
-    }
+    if (isNaN(req.params.yearmin)) {
+      yearA = 1990;
+      if (isNaN(req.params.yearmax)) {
+        yearB = 2019
+        console.log(yearB)
+        whereClause.year = {
+
+          [Op.between]: [yearA, yearB]
+        }
+      } else {
+        yearB = req.params.yearmax;
+        whereClause.year = {
+
+          [Op.between]: [yearA, yearB]
+        }
+        //return whereClause.model;
+      };
+    } else {
+      yearA = req.params.yearmin;
+      if (isNaN(req.params.yearmax)) {
+        YearB = 2019
+        whereClause.year = {
+
+          [Op.between]: [yearA, yearB]
+        }
+      } else {
+        yearB = req.params.yearmax;
+        whereClause.year = {
+
+          [Op.between]: [yearA, yearB]
+        }
+        //return whereClause.model;
+      }
+      //return whereClause.model;
+    };
+
+
+    if (isNaN(req.params.pricemin)) {
+      // whereClause.pricemin = 0;
+      priceA = 0;
+      if (isNaN(req.params.pricemax)) {
+        priceB = 200000
+        whereClause.price = {
+
+          [Op.between]: [priceA, priceB]
+        }
+      } else {
+        priceB = req.params.pricemax;
+        whereClause.price = {
+
+          [Op.between]: [priceA, priceB]
+        }
+      };
+    } else {
+      priceA = req.params.pricemin;
+      if (isNaN(req.params.pricemax)) {
+        priceB = 200000
+        whereClause.price = {
+
+          [Op.between]: [priceA, priceB]
+        }
+      } else {
+        priceB = req.params.pricemax;
+        whereClause.price = {
+
+          [Op.between]: [priceA, priceB]
+        }
+
+      }
+    };
+
+
+
+    //console.log(whereClause, +"    " + yearA, +"    " + yearB, +"    " + priceA, +"    " + priceB)
+
     // whereClause.year = {
     //   [Op.between]: [req.params.yearmin, req.params.yearmax]
     // }
@@ -67,9 +143,20 @@ module.exports = function (app) {
       res.status(404).json(data);
       console.log(data);
     }
-
+    console.log(whereClause);
     db.vehicle.findAll({
       where: whereClause
+      /*year: {
+        [Op.between]: [yearA, yearB]
+      },
+      price: {
+        [Op.between]: [priceA, priceB]
+      }
+      */
+
+      //   [Op.between]: [yearA, yearB],
+      // [Op.between]: [priceA, priceB]
+
       // where: {
       //   model: req.params.model,
       //   make: req.params.make,

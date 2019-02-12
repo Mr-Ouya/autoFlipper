@@ -277,7 +277,7 @@ var searchDatabase = function () {
     maxP: parseInt(selectMax.val())
 
   }
-
+  console.log(search)
 
   if (!(search.make && search.make && search.make, search.make, search.make, search.make)) {
     alert("Enter information");
