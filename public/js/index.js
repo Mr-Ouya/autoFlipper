@@ -44,7 +44,23 @@ var API = {
       type: "GET"
     });
   },
-  getModel: function () {
+  getSearch: function (data) {
+    console.log("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax");
+    console.log(":make/:model/:yearmin/:yearmax/:pricemin/:pricemax");
+    return $.ajax({
+      url: "/api/vehicle" + data,
+      //FULL URL 
+      type: "GET",
+      // data: JSON.stringify(data)
+    });
+  },
+  getSearchMake: function () {
+    return $.ajax({
+      url: "api/vehicle/" + make,
+      type: "GET"
+    });
+  },
+  getSearchModel: function () {
     return $.ajax({
       url: "api/vehicle/" + make + model,
       type: "GET"
@@ -209,7 +225,7 @@ var handleFormSubmit = function (event) {
   }
 
   API.saveOne(newVehicle).then(function () {
-    refreshExamples();
+    refreshData();
   });
   newType.val("");
   newMake.val("");
@@ -243,20 +259,33 @@ var searchDatabase = function () {
   console.log(selectMin.val());
   console.log(selectMax.val());
 
-  var yearMin = parseInt(selectMinY);
-  var yearMax = parseInt(selectMaxY);
-  var priceMin = parseInt(selectMin);
-  var priceMax = parseInt(selectMax);
+  var modelV = select1Make.val();
+  var mxY = selectMaxY.val();
+  var mnY = selectMinY.val();
+  var mxP = selectMax.val();
+  var mxP = selectMin.val();
 
 
 
-  if (!(newSeach.make && newSeach.make && newSeach.make, newSeach.make, newSeach.make, newSeach.make)) {
+  var search = {
+
+    make: select1Make.val(),
+    model: selectModel.val(),
+    minY: parseInt(selectMinY.val()),
+    maxY: parseInt(selectMaxY.val()),
+    minP: parseInt(selectMin.val()),
+    maxP: parseInt(selectMax.val())
+
+  }
+  console.log(search)
+
+  if (!(search.make && search.make && search.make, search.make, search.make, search.make)) {
     alert("Enter information");
     return;
   } else {
-
-    API.getAll(newSeach).then(function (data) {
-
+    newSeach = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
+    API.getSearch(newSeach).then(function (data) {
+      console.log(data);
       console.log("searching");
 
     })
