@@ -1,6 +1,8 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+var session = require('express-session');
+
 
 var db = require("./models");
 
@@ -22,6 +24,11 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
 
 // Routes
 require("./routes/apiRoutes")(app);
