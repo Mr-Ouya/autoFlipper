@@ -60,7 +60,7 @@ module.exports = function (app) {
 
 
     if (isNaN(req.params.yearmin)) {
-      yearA = 1990;
+      yearA = 2000;
       if (isNaN(req.params.yearmax)) {
         yearB = 2019
         console.log(yearB)
@@ -198,4 +198,30 @@ module.exports = function (app) {
 
 
   })
+  app.post('/autoflipper/auth', function (request, response) {
+    var username = request.body.username;
+    var password = request.body.password;
+    if (username && password) {
+      db.accounts.findAll({
+        where: {
+          username: username,
+          password: password
+        }
+      }).then(function (results) {
+        if (results.length > 0) {
+          request.session.loggedin = true;
+          request.session.username = username;
+          response.redirect('/');
+        } else {
+          response.send('Incorrect Username and/or Password!');
+        }
+        response.end();
+      });
+    } else {
+      response.send('Please enter Username and Password!');
+      response.end();
+    }
+  });
+
+
 };

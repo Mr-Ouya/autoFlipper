@@ -54,19 +54,6 @@ var API = {
       // data: JSON.stringify(data)
     });
   },
-  getSearchMake: function () {
-    return $.ajax({
-      url: "api/vehicle/" + make,
-      type: "GET"
-    });
-  },
-  getSearchModel: function () {
-    return $.ajax({
-      url: "api/vehicle/" + make + model,
-      type: "GET"
-    });
-  },
-
   deleteOne: function (id) {
     return $.ajax({
       url: "api/vehicle/" + id,
@@ -91,8 +78,6 @@ $(document).ready(function () {
 
 popFirstItem(select1Make, popularVehicle);
 
-
-
 function popFirstItem(select, data) {
   console.log(select);
 
@@ -115,7 +100,6 @@ function popFirstItem(select, data) {
   }
 
 }
-
 
 function popItems(select, data) {
   // dropdownEnable()
@@ -190,7 +174,19 @@ function callmake(make, cb) {
   })
 }
 
+function populateResults(arr) {
 
+  for (var i = 0; 0 < arr.length; i++) {
+
+    var item = $("<div></div");
+
+    item.addClass("row boxstyle");
+
+
+
+  }
+
+}
 
 
 ///////
@@ -270,17 +266,13 @@ var searchDatabase = function () {
 
 
   var search = {
-
     make: select1Make.val(),
     model: selectModel.val(),
     minY: parseInt(selectMinY.val()),
     maxY: parseInt(selectMaxY.val()),
     minP: parseInt(selectMin.val()),
     maxP: parseInt(selectMax.val())
-
   }
-  console.log(search)
-
   if (!(search.make && search.make && search.make, search.make, search.make, search.make)) {
     alert("Enter information");
     return;
@@ -288,29 +280,17 @@ var searchDatabase = function () {
     newSeach = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
     API.getSearch(newSeach).then(function (data) {
       console.log(data);
-      console.log("searching");
-
     })
-
-
-
-
-
-
   }
 }
 
 function dropdownEnable() {
-
   selectModel.prop("disabled", false)
   selectMinY.prop("disabled", false)
   selectMaxY.prop("disabled", false)
   selectMin.prop("disabled", false)
   selectMax.prop("disabled", false)
 }
-
-
-
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $("#makeSelect1").on("change", optionMake, popnewItems)

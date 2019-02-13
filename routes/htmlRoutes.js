@@ -1,5 +1,5 @@
 var db = require("../models");
-var session = require("express-session");
+//var session = require("express-session");
 
 module.exports = function (app) {
   // Load index page
@@ -9,8 +9,8 @@ module.exports = function (app) {
         msg: "Welcome!",
         vehicle: vehicleInfo,
       });
-    })
-  })
+    });
+  });
 
   app.get("/autoflipper/accountlogin", function (req, res) {
     res.render("login", {
@@ -24,13 +24,9 @@ module.exports = function (app) {
     res.render("404");
   });
 
-  app.get("/register", function (req, res) {
-    res.render("register")
+  app.get("/autoflipper/registeruser", function (req, res) {
+    res.render("register", {
+      msg: "Register Account"
+    })
   })
-
-
-
-
-
-
 };

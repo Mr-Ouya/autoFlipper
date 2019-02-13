@@ -8,18 +8,14 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="/autoflipper/accountlogin">Login/Register</a>
       </li>
     </ul>
   </div>
 </nav>
-
 
 <h1 class="titleS">Auto Flipper</h1>
 <div id="home">
@@ -31,7 +27,7 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="exampleSelect1" class="nameSearch">Make</label>
+                <label for="yearSN" class="nameSearch">Make</label>
                 <select class="form-control" id="makeSelect1">
                   <option selected>Make</option>
                 </select>
@@ -39,7 +35,7 @@
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="exampleSelect1" class="nameSearch">Model</label>
+                <label for="yearSM" class="nameSearch">Model</label>
                 <select class="form-control" id="modelSelect1">
                   <-- <option selected>Model</option> !-->
                 </select>
@@ -48,7 +44,7 @@
 
             <div class="col">
               <div class="form-group">
-                <label for="exampleSelect1" class="nameSearch">Year</label>
+                <label for="yearSMin" class="nameSearch">Year</label>
                 <select class="form-control" id="yearminSelect1">
                   <option selected>Year</option>
                 </select>
@@ -57,7 +53,7 @@
 
             <div class="col">
               <div class="form-group">
-                <label for="exampleSelect1" class="nameSearch">Year</label>
+                <label for="yearSMax" class="nameSearch">Year</label>
                 <select class="form-control" id="yearmaxSelect1">
                   <option selected>Year</option>
                 </select>
@@ -65,37 +61,30 @@
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="exampleSelect1" class="nameSearch">Price</label>
+                <label for="yearSMin" class="nameSearch">Price</label>
                 <select class="form-control" id="minSelect1">
                   <option selected>Price</option>
                 </select>
               </div>
-
             </div>
-
             <div class="col">
               <div class="form-group">
-                <label for="exampleSelect1" class="nameSearch">Price</label>
+                <label for="yearSMax" class="nameSearch">Price</label>
                 <select class="form-control" id="maxSelect1">
                   <option selected>Price</option>
-
-                  <div> class="row" class="submitstyle">
-                    <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
-                  </div>
               </div>
             </div>
-
-
           </div>
-
-
         </div>
-
       </div>
-
+      <div class="row" class="submitstyle">
+        <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
+      </div>
     </div>
 
   </div>
+
+</div>
 
 </div>
 <div class="comtainer">
@@ -133,15 +122,7 @@
 
 <div class="container">
 
-  {{#each vehicle}}
-  <div class="row itemH">
-    <div class="col">
-      <h5 class="mmpStyle">{{this.make}} : {{this.model}} {{this.price}}</h5>
-      <p class="decript">{{this.decription}}</p>
-    </div>
-    <div class="col"></div>
-  </div>
-  {{/each}}
+
 
 </div>
 </div>
