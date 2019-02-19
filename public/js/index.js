@@ -1,5 +1,5 @@
 // Get references to page elements
-
+/* eslint-disable */
 var $submitBtn = $("#submit");
 var submitSearch = $("#submitSearch");
 var newType = $("#typeV");
@@ -51,7 +51,7 @@ var API = {
       url: "/api/vehicle" + data,
       //FULL URL 
       type: "GET",
-      // data: JSON.stringify(data)
+      //   data: JSON.stringify(data)
     });
   },
   deleteOne: function (id) {
@@ -84,7 +84,7 @@ function popFirstItem(select, data) {
   var firstdrop = select;
 
   for (var i = 0; i < data.length; i++) {
-    console.log(data);
+
     var newSelect = $("<option></option").text(data[i]);
 
     newSelect.val(data[i]);
@@ -105,13 +105,16 @@ function popItems(select, data) {
   // dropdownEnable()
   var firstdrop = select;
 
-  firstdrop.empty();
+  if (firstdrop === selectModel) {
+    firstdrop.not(".newoptions");
+    console.log("removr");
+  }
+
   console.log(data);
   for (var i = 0; i < data.length; i++) {
     var newSelect = $("<option></option").text(data[i]);
 
     newSelect.val(data[i]);
-
     newSelect.addClass("newoptions");
 
     newSelect.data(data[i]);
@@ -176,14 +179,35 @@ function callmake(make, cb) {
 
 function populateResults(arr) {
 
-  for (var i = 0; 0 < arr.length; i++) {
+  var resultbox = $(".resultsBox");
+
+  resultbox.empty();
+  for (var i = 0; i < arr.length; i++) {
+    console.log(arr[i].make)
 
     var item = $("<div></div");
 
     item.addClass("row boxstyle");
 
+    var col1 = $("<div></div>").addClass("col data");
 
+    var col2 = $("<div></div>").addClass("col img");
 
+    var textMM = $("<p></p>").addClass("makemodel");
+    var textP = $("<p></p>").addClass("price");
+    var textdes = $("<p></p>").addClass("descriptS");
+    var textkil = $("<p></p>").addClass("kiloS");
+    textMM.append(arr[i].make + " : " + arr[i].model).text;
+    textP.append(arr[i].price);
+    textdes.append(arr[i].description);
+    textkil.append(arr[i].kilometers);
+
+    col1.append(textMM, textP, textdes, textkil);
+    // col1.append(item);
+    item.append(col1, col2);
+
+    resultbox.append(item);
+    //item.append(resultbox);
   }
 
 }
@@ -280,6 +304,7 @@ var searchDatabase = function () {
     newSeach = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
     API.getSearch(newSeach).then(function (data) {
       console.log(data);
+      populateResults(data);
     })
   }
 }
@@ -298,3 +323,5 @@ $("#makeSelect1").on("change", optionMake, popnewItems)
 submitSearch.on("click", searchDatabase);
 //$exampleList.on("click", ".delete", handleDeleteBtnClick);
 //get all content from database
+
+/* eslint-enable camelcase */

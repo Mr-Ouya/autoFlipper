@@ -2,6 +2,9 @@ var db = require("../models");
 var Sequelize = require("sequelize");
 var Op = Sequelize.Op;
 
+
+
+
 module.exports = function (app) {
   // Get all examples
   app.get("/api/vehicle", function (req, res) {
@@ -170,10 +173,11 @@ module.exports = function (app) {
       // }
 
     }).then(function (data) {
-      res.json(data);
-      console.log(data);
+      res.json(data)
     });
-  });
+
+  })
+
 
 
   // Create a new example
@@ -194,11 +198,13 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/api/new_account", function (req, res) {
+  app.post("/new_account", function (req, res) {
+
+
 
 
   })
-  app.post('/autoflipper/auth', function (request, response) {
+  app.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
     if (username && password) {
@@ -224,4 +230,4 @@ module.exports = function (app) {
   });
 
 
-};
+}

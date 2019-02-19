@@ -2,13 +2,28 @@
   line-height: 2.5;
 }
 
-.resultbox {
-  height: 300px;
+.resultsBox {
+  height: auto;
   width: 100%;
   margin: 40px;
   border: solid gray;
-  margin: 60px;
   border-width: 2px;
+  border: ridge;
+  padding: 30px;
+
+
+
+
+}
+
+nav {
+  margin-bottom: 20px;
+}
+
+.search {
+
+  border: ridge;
+  padding: 30px;
 
 }
 
@@ -64,4 +79,16 @@
   width: 300px;
   margin: 0 auto;
   font-family: Tahoma, Geneva, sans-serif;
+}
+
+
+.makemodel {
+  text-decoration: underline;
+  font-size: 22px;
+}
+
+.price {
+  text-decoration: underline;
+  font-size: 22px;
+  font-style: italic;
 }
