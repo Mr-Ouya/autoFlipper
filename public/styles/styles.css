@@ -5,15 +5,12 @@
 .resultsBox {
   height: auto;
   width: 100%;
-  margin: 40px;
+  margin-top: 200px;
+
   border: solid gray;
   border-width: 2px;
   border: ridge;
   padding: 30px;
-
-
-
-
 }
 
 nav {
@@ -91,4 +88,34 @@ nav {
   text-decoration: underline;
   font-size: 22px;
   font-style: italic;
+}
+
+.boxstyle {
+
+  margin-bottom: 100px;
+  border: solid;
+  border-color: #e0e0e0;
+  height: auto;
+}
+
+.makemodel,
+.price,
+.descriptS,
+kiloS {
+
+
+  margin: 10px
+}
+
+body {
+  background-color: #e3e5ec0d;
+}
+
+.searchText {
+
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 51px;
+
+
 }

@@ -201,4 +201,8 @@ module.exports = function (app) {
 
   })
 
+  app.get("/addVehicle", function (req, res) {
+
+    res.render("")
+  })
 };

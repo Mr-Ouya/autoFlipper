@@ -13,9 +13,13 @@
       <li class="nav-item active">
         <a class="nav-link" href="/accountlogin">Login/Register</a>
       </li>
+      <li>
+        <a class="nav-link" href="/addVehicle">Sell you Vehicle</a>
+      </li>
     </ul>
   </div>
 </nav>
+
 
 <h1 class="titleS">Auto Flipper</h1>
 <div id="home">
@@ -23,7 +27,9 @@
     <div class="row">
       <div class="sizing"></div>
       <div class="container">
+
         <div class="search">
+          <p class="searchText">Search</p>
           <div class="row">
             <div class="col">
               <div class="form-group">
@@ -75,13 +81,13 @@
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
+          </div>
         </div>
       </div>
-      <div class="row" class="submitstyle">
-        <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
-      </div>
     </div>
-
   </div>
 
 </div>
@@ -121,6 +127,9 @@
 </form>
 
 <div class="container resultsBox">
+  <div class="row results">
+    <p>Results Below</p>
+  </div>
 
 
   {{> search}}
