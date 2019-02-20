@@ -1,11 +1,17 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+var session = require('express-session');
+var path = require("path");
+
 
 var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
+
+
+
 
 // Middleware
 app.use(express.urlencoded({
@@ -13,15 +19,24 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(express.static("public"));
-
+app.set('views', path.join(__dirname, 'views/'));
 // Handlebars
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main"
+    defaultLayout: "main",
+    partialsDir: path.join(__dirname, "views/partials/")
   })
 );
+
+
 app.set("view engine", "handlebars");
+
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
 
 // Routes
 require("./routes/apiRoutes")(app);

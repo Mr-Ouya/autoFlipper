@@ -1,29 +1,12 @@
 var db = require("../models");
 var Sequelize = require("sequelize");
 var Op = Sequelize.Op;
-
+var bcrypt = require("bcrypt");
 module.exports = function (app) {
   // Get all examples
   app.get("/api/vehicle", function (req, res) {
     db.vehicle.findAll({}).then(function (allVehicle) {
       res.json(allVehicle);
-    });
-  });
-  app.get("/api/vehicle/:make", function (req, res) {
-
-    var model = req.params.make;
-
-    db.vehicle.findAll({
-
-      where: {
-
-        model: model
-
-      }
-    }).then(function (listmake) {
-      res.json(listmake);
-
-
     });
   });
   app.get("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
@@ -60,7 +43,7 @@ module.exports = function (app) {
 
 
     if (isNaN(req.params.yearmin)) {
-      yearA = 1990;
+      yearA = 2000;
       if (isNaN(req.params.yearmax)) {
         yearB = 2019
         console.log(yearB)
@@ -129,16 +112,6 @@ module.exports = function (app) {
 
       }
     };
-
-
-
-    //console.log(whereClause, +"    " + yearA, +"    " + yearB, +"    " + priceA, +"    " + priceB)
-
-    // whereClause.year = {
-    //   [Op.between]: [req.params.yearmin, req.params.yearmax]
-    // }
-
-
     if (whereClause.length == 0) {
       res.status(404).json(data);
       console.log(data);
@@ -146,34 +119,13 @@ module.exports = function (app) {
     console.log(whereClause);
     db.vehicle.findAll({
       where: whereClause
-      /*year: {
-        [Op.between]: [yearA, yearB]
-      },
-      price: {
-        [Op.between]: [priceA, priceB]
-      }
-      */
-
-      //   [Op.between]: [yearA, yearB],
-      // [Op.between]: [priceA, priceB]
-
-      // where: {
-      //   model: req.params.model,
-      //   make: req.params.make,
-      //   year: {
-      //     [Op.between]: [req.params.yearmin, req.params.yearmax]
-      //   },
-      //   price: {
-      //     [Op.between]: [req.params.pricemin, req.params.pricemax]
-      //   }
-
-      // }
-
     }).then(function (data) {
-      res.json(data);
       console.log(data);
+      res.json(data)
     });
-  });
+
+  })
+
 
 
   // Create a new example
@@ -194,8 +146,58 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/api/new_account", function (req, res) {
+  app.post("/new_account", function (req, res) {
+    var saltRounds = 10;
+    console.log(req.body);
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      console.log(req.body.password);
+      if (err) throw err
 
-
+      bcrypt.hash(req.body.password, salt, function (err, hash) {
+        if (err) throw err;
+        var newaccount = {
+          username: req.body.username,
+          email: req.body.email,
+          password: hash
+        }
+        db.accounts.create(newaccount).then(function (data) {
+          res.redirect("/accountlogin")
+        })
+      })
+    })
   })
+  app.post('/auth', function (request, response) {
+    var username = request.body.username;
+    var password = request.body.password;
+
+    if (username && password) {
+      db.accounts.findAll({
+        where: {
+          username: username,
+          // password: password
+        }
+      }).then(function (results) {
+        if (!results) {
+          res.redirect('/');
+        } else {
+          bcrypt.compare(password, results[0].dataValues.password, function (err, results) {
+            if (err) throw err;
+            if (results == true) {
+              request.session.loggedin = true;
+              request.session.username = username;
+              response.redirect('/');
+
+            } else {
+              response.send("Incorrect Password or Username");
+            }
+
+
+
+          })
+
+        }
+      })
+    }
+  });
+
 };
