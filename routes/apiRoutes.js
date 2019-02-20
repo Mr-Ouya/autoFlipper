@@ -1,6 +1,9 @@
 var db = require("../models");
 var Sequelize = require("sequelize");
 var Op = Sequelize.Op;
+var bcrypt = require("bcrypt");
+
+
 
 
 
@@ -199,35 +202,57 @@ module.exports = function (app) {
   });
 
   app.post("/new_account", function (req, res) {
+    var saltRounds = 10;
+    console.log(req.body);
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      console.log(req.body.password);
+      if (err) throw err
 
-
-
-
+      bcrypt.hash(req.body.password, salt, function (err, hash) {
+        if (err) throw err;
+        var newaccount = {
+          username: req.body.username,
+          email: req.body.email,
+          password: hash
+        }
+        db.accounts.create(newaccount).then(function (data) {
+          res.redirect("/accountlogin")
+        })
+      })
+    })
   })
   app.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
+
     if (username && password) {
       db.accounts.findAll({
         where: {
           username: username,
-          password: password
+          // password: password
         }
       }).then(function (results) {
-        if (results.length > 0) {
-          request.session.loggedin = true;
-          request.session.username = username;
-          response.redirect('/');
+        if (!results) {
+          res.redirect('/');
         } else {
-          response.send('Incorrect Username and/or Password!');
+          bcrypt.compare(password, results[0].dataValues.password, function (err, results) {
+            if (err) throw err;
+            if (results == true) {
+              request.session.loggedin = true;
+              request.session.username = username;
+              response.redirect('/', alert("You are logged in"));
+              r
+            } else {
+              res.send("Incorrect Password or Username");
+            }
+
+
+
+          })
+
         }
-        response.end();
-      });
-    } else {
-      response.send('Please enter Username and Password!');
-      response.end();
+      })
     }
   });
-
 
 }

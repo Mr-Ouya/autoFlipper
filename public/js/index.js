@@ -100,7 +100,7 @@ function popFirstItem(select, data) {
   }
 
 }
-
+/////////////////////////////
 function popItems(select, data) {
   // dropdownEnable()
   var firstdrop = select;
@@ -122,39 +122,23 @@ function popItems(select, data) {
     newSelect.onclick = popnewItems;
     firstdrop.append(newSelect);
   }
-
 }
-
-
-
-
+/////////////////////////////
 var popnewItems = function () {
   dropdownEnable()
   var make = $(this).val();
-
-
   console.log(make)
-
   console.log(modelNames);
   callmake(make, function (make) {
-
     console.log(make)
-
     popItems(selectModel, modelNames);
     popItems(selectMin, price);
     popItems(selectMax, price);
     popItems(selectMaxY, years);
     popItems(selectMinY, years);
-
-
   });
-
-
-
 }
-
-
-
+/////////////////////////////
 function callmake(make, cb) {
   $.ajax({
     url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/" + make + "?format=json",
@@ -176,6 +160,7 @@ function callmake(make, cb) {
     }
   })
 }
+/////////////////////////////
 
 function populateResults(arr) {
 
@@ -197,11 +182,13 @@ function populateResults(arr) {
     var textP = $("<p></p>").addClass("price");
     var textdes = $("<p></p>").addClass("descriptS");
     var textkil = $("<p></p>").addClass("kiloS");
+    var img = $("<img class ='imgStyle'>");
+    img.attr("src", arr[i].img);
     textMM.append(arr[i].make + " : " + arr[i].model).text;
     textP.append(arr[i].price);
     textdes.append(arr[i].description);
     textkil.append(arr[i].kilometers);
-
+    col2.append(img);
     col1.append(textMM, textP, textdes, textkil);
     // col1.append(item);
     item.append(col1, col2);
@@ -211,23 +198,13 @@ function populateResults(arr) {
   }
 
 }
-
-
-///////
-
-
-// The API object contains methods for each kind of request we'll make
-
-
-// refreshExamples gets new examples from the db and repopulates the list
+/////////////////////////////
 var refreshData = function () {
   API.getAll().then(function (data) {
 
   })
 };
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+/////////////////////////////
 var handleFormSubmit = function (event) {
   event.preventDefault();
   console.log(newModel);
@@ -237,7 +214,8 @@ var handleFormSubmit = function (event) {
     model: newModel.val().trim(),
     price: newPrice.val(),
     description: newDescrpt.val().trim(),
-    year: newYear.val()
+    year: newYear.val(),
+    //img needed to added
   };
   console.log(newVehicle)
 
@@ -257,9 +235,8 @@ var handleFormSubmit = function (event) {
   newYear.val("");
   newDescrpt.val("");
 };
+/////////////////////////////
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
@@ -269,10 +246,8 @@ var handleDeleteBtnClick = function () {
     refreshData();
   });
 };
-//ajax call to api with models, make , year
-
+/////////////////////////////
 var searchDatabase = function () {
-  //var selectedText = $(this).find("option:selected").text();
 
   console.log(select1Make.val());
   console.log(selectModel.val());
@@ -308,7 +283,7 @@ var searchDatabase = function () {
     })
   }
 }
-
+////////////////////////////
 function dropdownEnable() {
   selectModel.prop("disabled", false)
   selectMinY.prop("disabled", false)
@@ -316,12 +291,10 @@ function dropdownEnable() {
   selectMin.prop("disabled", false)
   selectMax.prop("disabled", false)
 }
-// Add event listeners to the submit and delete buttons
+/////////////////////////////
 $submitBtn.on("click", handleFormSubmit);
 $("#makeSelect1").on("change", optionMake, popnewItems)
 
 submitSearch.on("click", searchDatabase);
-//$exampleList.on("click", ".delete", handleDeleteBtnClick);
-//get all content from database
 
 /* eslint-enable camelcase */
