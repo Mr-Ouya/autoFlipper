@@ -2,34 +2,11 @@ var db = require("../models");
 var Sequelize = require("sequelize");
 var Op = Sequelize.Op;
 var bcrypt = require("bcrypt");
-
-
-
-
-
-
 module.exports = function (app) {
   // Get all examples
   app.get("/api/vehicle", function (req, res) {
     db.vehicle.findAll({}).then(function (allVehicle) {
       res.json(allVehicle);
-    });
-  });
-  app.get("/api/vehicle/:make", function (req, res) {
-
-    var model = req.params.make;
-
-    db.vehicle.findAll({
-
-      where: {
-
-        model: model
-
-      }
-    }).then(function (listmake) {
-      res.json(listmake);
-
-
     });
   });
   app.get("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
@@ -135,16 +112,6 @@ module.exports = function (app) {
 
       }
     };
-
-
-
-    //console.log(whereClause, +"    " + yearA, +"    " + yearB, +"    " + priceA, +"    " + priceB)
-
-    // whereClause.year = {
-    //   [Op.between]: [req.params.yearmin, req.params.yearmax]
-    // }
-
-
     if (whereClause.length == 0) {
       res.status(404).json(data);
       console.log(data);
@@ -152,30 +119,8 @@ module.exports = function (app) {
     console.log(whereClause);
     db.vehicle.findAll({
       where: whereClause
-      /*year: {
-        [Op.between]: [yearA, yearB]
-      },
-      price: {
-        [Op.between]: [priceA, priceB]
-      }
-      */
-
-      //   [Op.between]: [yearA, yearB],
-      // [Op.between]: [priceA, priceB]
-
-      // where: {
-      //   model: req.params.model,
-      //   make: req.params.make,
-      //   year: {
-      //     [Op.between]: [req.params.yearmin, req.params.yearmax]
-      //   },
-      //   price: {
-      //     [Op.between]: [req.params.pricemin, req.params.pricemax]
-      //   }
-
-      // }
-
     }).then(function (data) {
+      console.log(data);
       res.json(data)
     });
 
@@ -240,10 +185,10 @@ module.exports = function (app) {
             if (results == true) {
               request.session.loggedin = true;
               request.session.username = username;
-              response.redirect('/', alert("You are logged in"));
-              r
+              response.redirect('/');
+
             } else {
-              res.send("Incorrect Password or Username");
+              response.send("Incorrect Password or Username");
             }
 
 
@@ -255,4 +200,4 @@ module.exports = function (app) {
     }
   });
 
-}
+};

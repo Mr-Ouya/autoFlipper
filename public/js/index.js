@@ -45,8 +45,6 @@ var API = {
     });
   },
   getSearch: function (data) {
-    console.log("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax");
-    console.log(":make/:model/:yearmin/:yearmax/:pricemin/:pricemax");
     return $.ajax({
       url: "/api/vehicle" + data,
       //FULL URL 
@@ -218,14 +216,13 @@ var handleFormSubmit = function (event) {
     //img needed to added
   };
   console.log(newVehicle)
-
   if (!(newVehicle.vehicle && newVehicle.make && newVehicle.model)) {
     alert("Enter information");
     return;
   }
 
   API.saveOne(newVehicle).then(function () {
-    refreshData();
+
   });
   newType.val("");
   newMake.val("");
@@ -236,19 +233,8 @@ var handleFormSubmit = function (event) {
   newDescrpt.val("");
 };
 /////////////////////////////
-
-var handleDeleteBtnClick = function () {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteOne(idToDelete).then(function () {
-    refreshData();
-  });
-};
 /////////////////////////////
 var searchDatabase = function () {
-
   console.log(select1Make.val());
   console.log(selectModel.val());
   console.log(selectMaxY.val());
@@ -272,17 +258,22 @@ var searchDatabase = function () {
     minP: parseInt(selectMin.val()),
     maxP: parseInt(selectMax.val())
   }
-  if (!(search.make && search.make && search.make, search.make, search.make, search.make)) {
-    alert("Enter information");
-    return;
+
+  if (search.minY > search.maxY || search.minP > search.maxP) {
+
+    alert("Invalid Search");
   } else {
-    newSeach = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
-    API.getSearch(newSeach).then(function (data) {
+    newSearch = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
+    API.getSearch(newSearch).then(function (data) {
       console.log(data);
       populateResults(data);
     })
+
+
+
   }
-}
+
+};
 ////////////////////////////
 function dropdownEnable() {
   selectModel.prop("disabled", false)
