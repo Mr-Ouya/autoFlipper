@@ -4,12 +4,12 @@ var Op = Sequelize.Op;
 var bcrypt = require("bcrypt");
 module.exports = function (app) {
   // Get all examples
-  app.get("/api/vehicle", function (req, res) {
+  app.get("/autoflipper/api/vehicle/all", function (req, res) {
     db.vehicle.findAll({}).then(function (allVehicle) {
       res.json(allVehicle);
     });
   });
-  app.get("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
+  app.get("/autoflipper/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
     console.log(req.params)
     //console.log(req.body);
     var yearA;
@@ -23,14 +23,9 @@ module.exports = function (app) {
 
     //Check if Make has been selected 
     if (req.params.make === "Make") {
-      res.status(404).json({
-        error: 'Make has not been selected'
-      })
     } else {
-
       whereClause.make = req.params.make;
       // return whereClause.model;
-
     }
     ///////////////////
     if (req.params.model === "Model") {} else {
@@ -113,10 +108,12 @@ module.exports = function (app) {
       }
     };
     if (whereClause.length == 0) {
+        console.log(data);
+      console.log("hi")
       res.status(404).json(data);
-      console.log(data);
-    }
-    console.log(whereClause);
+    
+    }else{
+        console.log(whereClause);
     db.vehicle.findAll({
       where: whereClause
     }).then(function (data) {
@@ -124,19 +121,21 @@ module.exports = function (app) {
       res.json(data)
     });
 
+    }
+  
   })
 
 
 
   // Create a new example
-  app.post("/api/vehicle", function (req, res) {
+  app.post("/autoflipper/api/vehicle", function (req, res) {
     db.vehicle.create(req.body).then(function (dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/vehicle/:id", function (req, res) {
+  app.delete("/autoflipper/api/vehicle/:id", function (req, res) {
     db.vehicle.destroy({
       where: {
         id: req.params.id
@@ -146,7 +145,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/new_account", function (req, res) {
+  app.post("/autoflipper/new_account", function (req, res) {
     var saltRounds = 10;
     console.log(req.body);
     bcrypt.genSalt(saltRounds, function (err, salt) {

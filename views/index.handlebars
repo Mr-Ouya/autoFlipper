@@ -8,26 +8,31 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/autoflipper">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/accountlogin">Login/Register</a>
+        <a class="nav-link" href="/autoflipper/login">Login/Register</a>
       </li>
       <li>
-        <a class="nav-link" href="/addVehicle">Sell you Vehicle</a>
+        <a class="nav-link" href="/autoflipper/sell-your-vehicle">Sell your Vehicle</a>
       </li>
     </ul>
   </div>
 </nav>
 
-
+<div class="row titleDiv">
+  <title>Auto Flipper</title>
+</div>
 <h1 class="titleS">Auto Flipper</h1>
+
+
+
+
 <div id="home">
   <div class="container">
     <div class="row">
       <div class="sizing"></div>
       <div class="container">
-
+        <div class="container searchDiv">
         <div class="search">
           <p class="searchText">Search</p>
           <div class="row">
@@ -81,50 +86,17 @@
               </div>
             </div>
           </div>
-
-          <div class="row">
+      </div>     
+    </div>  
+      </div>
+       <div class="row btnSubmit">
             <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
           </div>
-        </div>
-      </div>
     </div>
   </div>
 
-</div>
 
-</div>
-<div class="comtainer">
-</div>
-<form action="POST">
-  <div class="row">
-    <label>What type of Vehicle</label>
-    <input type="text" id="typeV">
-  </div>
-  <div class="row">
-    <label>What Make</label>
-    <input type="text" id="typeMake">
-  </div>
-  <div class="row">
-    <label> What model</label>
-    <input type="text" id="typeModel">
-  </div>
-  <div class="row">
-    <label>Price</label>
-    <input type="text" id="typePrice">
-  </div>
-  <div class="row">
-    <label>Year</label>
-    <input type="text" id="typeYear">
-  </div>
-  <div class="row">
-    <label>Description of Vehicle</label>
-    <textarea id="typeDes"></textarea>
-  </div>
-  <div class="row">
-    <label>Add vehicle to your list</label>
-    <input type="submit" id="submit">
-  </div>
-</form>
+
 
 <div class="container resultsBox">
   <div class="row results">
@@ -136,9 +108,5 @@
 
 </div>
 </div>
-</div>
 
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>

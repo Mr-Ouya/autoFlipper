@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Auto Flipper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <a class="nav-link" href="/autoflipper">Home</a>
+      </li>
+      <a class="nav-link" href="/autoflipper/login">Login/Register</a>
+      </li></a>
+      </li>
+      <li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/autoflipper/sell-your-vehicle">Sell your Vehicle<span
+            class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container formStyle">
+  <form action="POST">
+    <div class="row rowSell">
+      <div class="form-group">
+        <label for="make-sell" class="makeSell">Make</label>
+        <select class="form-control" id="inputMake">
+          <option selected>Make</option>
+        </select>
+      </div>
+    </div>
+    <div class="row rowSell">
+      <div class="form-group">
+        <label for="sell-model" class="sellModel">Model</label>
+        <select class="form-control" id="inputModel">
+          <option selected>Model</option>
+        </select>
+      </div>
+    </div>
+    <div class="row rowSell">
+      <div class="form-group">
+        <label for="sell-year" class="sellYear">Year</label>
+        <select class="form-control" id="inputYear">
+          <option selected>Year</option>
+        </select>
+      </div>
+    </div>
+    <div class="row rowSell">
+      <div class="form-group">
+        <label for="sell-price" class="sellPrice">Price</label>
+        <input type="number" id="inputPrice">
+      </div>
+    </div>
+    <div class="row rowSell">
+      <div class="form-group">
+        <label class="desLabel">Description of Vehicle</label>
+        <textarea id="typeDes"></textarea>
+      </div>
+    </div>
+    <div class="row rowSell">
+      <input type="submit" id="submit">
+    </div>
+</div>
+</form>

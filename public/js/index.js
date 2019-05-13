@@ -9,10 +9,6 @@ var newPrice = $("#typePrice");
 var newDescrpt = $("#typeDes");
 var newYear = $("#typeYear")
 var newImage = $("");
-var modSea = $("#btnmodel");
-var makeSea = $("#btnmake");
-var yearSea = $("#btnyear")
-var priceSea = $("#btnprice");
 var optionMake = $(".newoptions");
 var select1Make = $("#makeSelect1")
 var selectModel = $("#modelSelect1")
@@ -28,25 +24,15 @@ years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008",
 price = ["1000", "5000", "10000", "15000", "20000", "25000", "30000", "35000", "40000", "45000", "50000", "55000", "60000", "65000", "70000", "75000"]
 ////////////
 var API = {
-  saveOne: function (example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/vehicle",
-      data: JSON.stringify(example)
-    });
-  },
   getAll: function () {
     return $.ajax({
-      url: "api/vehicle",
-      type: "GET"
+      url: "/autoflipper/api/vehicle/all",
+      type: "GET",
     });
   },
   getSearch: function (data) {
     return $.ajax({
-      url: "/api/vehicle" + data,
+      url: "/autoflipper/api/vehicle" + data,
       //FULL URL 
       type: "GET",
       //   data: JSON.stringify(data)
@@ -54,19 +40,13 @@ var API = {
   },
   deleteOne: function (id) {
     return $.ajax({
-      url: "api/vehicle/" + id,
+      url: "/autoflipperapi/vehicle/" + id,
       type: "DELETE"
     });
   }
 };
-
-
-
-
-////////////
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function () {
-
   selectModel.prop("disabled", true)
   selectMinY.prop("disabled", true)
   selectMaxY.prop("disabled", true)
@@ -75,48 +55,32 @@ $(document).ready(function () {
 })
 
 popFirstItem(select1Make, popularVehicle);
-
 function popFirstItem(select, data) {
   console.log(select);
-
   var firstdrop = select;
-
   for (var i = 0; i < data.length; i++) {
-
     var newSelect = $("<option></option").text(data[i]);
-
     newSelect.val(data[i]);
-
-
     newSelect.addClass("newoptions");
-
     newSelect.data(data[i]);
-
     newSelect.onclick = popnewItems;
-    //console.log(newSelect.val());
     firstdrop.append(newSelect);
   }
-
 }
 /////////////////////////////
 function popItems(select, data) {
   // dropdownEnable()
   var firstdrop = select;
-
   if (firstdrop === selectModel) {
     firstdrop.not(".newoptions");
     console.log("removr");
   }
-
   console.log(data);
   for (var i = 0; i < data.length; i++) {
     var newSelect = $("<option></option").text(data[i]);
-
     newSelect.val(data[i]);
     newSelect.addClass("newoptions");
-
     newSelect.data(data[i]);
-
     newSelect.onclick = popnewItems;
     firstdrop.append(newSelect);
   }
@@ -142,18 +106,13 @@ function callmake(make, cb) {
     url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/" + make + "?format=json",
     success: function (result) {
       //manually set up a append option likes orginally do for each statment is needed
-
       modelNames = [];
       for (var i = 0; i < result.Results.length; i++) {
-
         // console.log(result.Results[i].Model_Name);
-
         model = result.Results[i].Model_Name;
         modelNames.push(model);
       }
-
       //console.log(modelNames);
-
       cb(modelNames);
     }
   })
@@ -161,21 +120,14 @@ function callmake(make, cb) {
 /////////////////////////////
 
 function populateResults(arr) {
-
   var resultbox = $(".resultsBox");
-
   resultbox.empty();
   for (var i = 0; i < arr.length; i++) {
     console.log(arr[i].make)
-
     var item = $("<div></div");
-
     item.addClass("row boxstyle");
-
     var col1 = $("<div></div>").addClass("col data");
-
     var col2 = $("<div></div>").addClass("col img");
-
     var textMM = $("<p></p>").addClass("makemodel");
     var textP = $("<p></p>").addClass("price");
     var textdes = $("<p></p>").addClass("descriptS");
@@ -190,7 +142,6 @@ function populateResults(arr) {
     col1.append(textMM, textP, textdes, textkil);
     // col1.append(item);
     item.append(col1, col2);
-
     resultbox.append(item);
     //item.append(resultbox);
   }
@@ -199,11 +150,10 @@ function populateResults(arr) {
 /////////////////////////////
 var refreshData = function () {
   API.getAll().then(function (data) {
-
   })
 };
 /////////////////////////////
-var handleFormSubmit = function (event) {
+/*var handleFormSubmit = function (event) {
   event.preventDefault();
   console.log(newModel);
   var newVehicle = {
@@ -222,7 +172,6 @@ var handleFormSubmit = function (event) {
   }
 
   API.saveOne(newVehicle).then(function () {
-
   });
   newType.val("");
   newMake.val("");
@@ -231,26 +180,11 @@ var handleFormSubmit = function (event) {
   newDescrpt.val("");
   newYear.val("");
   newDescrpt.val("");
-};
+};*/
 /////////////////////////////
 /////////////////////////////
 var searchDatabase = function () {
-  console.log(select1Make.val());
-  console.log(selectModel.val());
-  console.log(selectMaxY.val());
-  console.log(selectMinY.val());
-  console.log(selectMin.val());
-  console.log(selectMax.val());
-
-  var modelV = select1Make.val();
-  var mxY = selectMaxY.val();
-  var mnY = selectMinY.val();
-  var mxP = selectMax.val();
-  var mxP = selectMin.val();
-
-
-
-  var search = {
+  let search = {
     make: select1Make.val(),
     model: selectModel.val(),
     minY: parseInt(selectMinY.val()),
@@ -258,21 +192,16 @@ var searchDatabase = function () {
     minP: parseInt(selectMin.val()),
     maxP: parseInt(selectMax.val())
   }
-
   if (search.minY > search.maxY || search.minP > search.maxP) {
-
     alert("Invalid Search");
   } else {
-    newSearch = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
+   let newSearch = '/' + search.make + '/' + search.model + '/' + search.minY + "/" + search.maxY + '/' + search.minP + "/" + search.maxP;
+   console.log(newSearch)
     API.getSearch(newSearch).then(function (data) {
-      console.log(data);
+      console.log(JSON.stringify(data));
       populateResults(data);
     })
-
-
-
   }
-
 };
 ////////////////////////////
 function dropdownEnable() {
@@ -283,9 +212,7 @@ function dropdownEnable() {
   selectMax.prop("disabled", false)
 }
 /////////////////////////////
-$submitBtn.on("click", handleFormSubmit);
 $("#makeSelect1").on("change", optionMake, popnewItems)
-
 submitSearch.on("click", searchDatabase);
 
 /* eslint-enable camelcase */

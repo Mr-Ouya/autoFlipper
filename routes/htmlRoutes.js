@@ -3,14 +3,15 @@ var db = require("../models");
 
 module.exports = function (app) {
   // Load index page
-  app.get("/", function (req, res) {
+  app.get("/autoflipper", function (req, res) {
 
+    
     res.render("index", {
-
+      
     });
   });
 
-  app.get("/accountlogin", function (req, res) {
+  app.get("/autoflipper/login", function (req, res) {
     res.render("login", {
       msg: "Login into Your Account"
     });
@@ -18,9 +19,18 @@ module.exports = function (app) {
   // Load example page and pass in an example by id
 
   // Render 404 page for any unmatched routes
+app.get("/autoflipper/sell-your-vehicle", function (req, res) {
+
+    res.render("sell", {
+    });
+  });
+  
+
+
   app.get("*", function (req, res) {
     res.render("404");
   });
+  
 
   app.get("/results", function (req, res) {
 
@@ -30,12 +40,13 @@ module.exports = function (app) {
 
   });
 
-  app.get("/api/vehicle", function (req, res) {
+
+  app.get("/autoflipper/api/vehicle/all", function (req, res) {
     db.vehicle.findAll({}).then(function (allVehicle) {
       res.json(allVehicle);
     });
   });
-  app.get("/api/vehicle/:make", function (req, res) {
+  app.get("/autoflipper/api/vehicle/:make", function (req, res) {
 
     var model = req.params.make;
 
@@ -52,7 +63,7 @@ module.exports = function (app) {
 
     });
   });
-  app.get("/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
+  app.get("/autoflipper/api/vehicle/:make/:model/:yearmin/:yearmax/:pricemin/:pricemax", function (req, res) {
     console.log(req.params)
     //console.log(req.body);
     var yearA;
@@ -201,8 +212,5 @@ module.exports = function (app) {
 
   })
 
-  app.get("/addVehicle", function (req, res) {
-
-    res.render("")
-  })
+  
 };
