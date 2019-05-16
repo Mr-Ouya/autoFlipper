@@ -1,17 +1,24 @@
+body,html{
+  height: 100%;
+  width: 100%;
+}
 .list-group-item {
   line-height: 2.5;
 }
 
+
 .resultsBox {
   height: auto;
   width: 100%;
-  margin-top: 200px;
+  max-width: 1110px;
+  right: 15px;
 
   border: solid gray;
   border-width: 2px;
   border: ridge;
   padding: 30px;
-}
+  position: absolute;
+  top: 435px;}
 
 nav {
   margin-bottom: 20px;
@@ -119,3 +126,8 @@ body {
 
 
 }
+
+.searchDiv{
+  position: absolute;
+}
+

@@ -1,11 +1,18 @@
 require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const path = require("path")
+const db = require("./models");
+const session = require("express-session");
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-var db = require("./models");
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+app.use(session({
+  secret:'fllipper',
+  resave:true,
+  saveUninitalized:true
+}))
 
 // Middleware
 app.use(express.urlencoded({
@@ -18,8 +25,7 @@ app.use(express.static("public"));
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main"
-    
+    defaultLayout: "main",
   })
 );
 app.set("view engine", "handlebars");

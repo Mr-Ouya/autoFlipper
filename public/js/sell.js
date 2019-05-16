@@ -13,7 +13,7 @@ popularVehicle = ["BMW", "Chevrolet", "Dodge", "Ford", "GMC", "Hyundai", "Jeep",
 years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"]
 price = ["1000", "5000", "10000", "15000", "20000", "25000", "30000", "35000", "40000", "45000", "50000", "55000", "60000", "65000", "70000", "75000"]
 ////////////
-var API = {
+var APISell = {
   saveOne: function (example) {
     return $.ajax({
       headers: {
@@ -51,6 +51,7 @@ function popFirstItem(select, data) {
 }
 /////////////////////////////
 function popItems(select, data) {
+  select.empty();
   var firstdrop = select;
   if (firstdrop === selectSellModel) {
     firstdrop.not(".newoptions");
@@ -66,6 +67,8 @@ function popItems(select, data) {
 }
 /////////////////////////////
 var popnewItems = function () {
+
+  console.log()
   dropdownEnable()
   var make = $(this).val();
   console.log(make)
@@ -106,7 +109,7 @@ var handleFormSubmit = function (event) {
     alert("Enter information");
     return;
   }
-  API.saveOne(newVehicle).then(function () {
+  APISell.saveOne(newVehicle).then(function () {
   });
   newType.val("");
   newMake.val("");

@@ -165,7 +165,7 @@ module.exports = function (app) {
       })
     })
   })
-  app.post('/auth', function (request, response) {
+  app.post('/autoflipper/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
 
@@ -177,14 +177,14 @@ module.exports = function (app) {
         }
       }).then(function (results) {
         if (!results) {
-          res.redirect('/');
+          res.send('No User Exist');
         } else {
           bcrypt.compare(password, results[0].dataValues.password, function (err, results) {
             if (err) throw err;
             if (results == true) {
               request.session.loggedin = true;
               request.session.username = username;
-              response.redirect('/');
+              response.redirect('/autoflipper');
 
             } else {
               response.send("Incorrect Password or Username");

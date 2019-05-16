@@ -207,7 +207,9 @@ app.get("/autoflipper/sell-your-vehicle", function (req, res) {
       // }
 
     }).then(function (data) {
-      res.send(data)
+      res.render("search",{
+        vehicle
+      })
     });
 
   })

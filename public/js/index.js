@@ -2,13 +2,6 @@
 /* eslint-disable */
 var $submitBtn = $("#submit");
 var submitSearch = $("#submitSearch");
-var newType = $("#typeV");
-var newMake = $("#typeMake");
-var newModel = $("#typeModel");
-var newPrice = $("#typePrice");
-var newDescrpt = $("#typeDes");
-var newYear = $("#typeYear")
-var newImage = $("");
 var optionMake = $(".newoptions");
 var select1Make = $("#makeSelect1")
 var selectModel = $("#modelSelect1")
@@ -54,8 +47,8 @@ $(document).ready(function () {
   selectMax.prop("disabled", true)
 })
 
-popFirstItem(select1Make, popularVehicle);
-function popFirstItem(select, data) {
+popMakeSearch(select1Make, popularVehicle);
+function popMakeSearch(select, data) {
   console.log(select);
   var firstdrop = select;
   for (var i = 0; i < data.length; i++) {
@@ -63,13 +56,20 @@ function popFirstItem(select, data) {
     newSelect.val(data[i]);
     newSelect.addClass("newoptions");
     newSelect.data(data[i]);
-    newSelect.onclick = popnewItems;
+    newSelect.onclick = popNSeachI;
     firstdrop.append(newSelect);
   }
 }
 /////////////////////////////
-function popItems(select, data) {
-  // dropdownEnable()
+function popSearchS(select, data) {
+  console.log(data);
+  // dbSearchEnable()
+        select.remove(".newoptions");
+
+  var length = select.children("option").length;
+  console.log(length);
+  if (length > 1){
+  }
   var firstdrop = select;
   if (firstdrop === selectModel) {
     firstdrop.not(".newoptions");
@@ -81,27 +81,28 @@ function popItems(select, data) {
     newSelect.val(data[i]);
     newSelect.addClass("newoptions");
     newSelect.data(data[i]);
-    newSelect.onclick = popnewItems;
+    newSelect.onclick = popNSeachI;
     firstdrop.append(newSelect);
   }
 }
 /////////////////////////////
-var popnewItems = function () {
-  dropdownEnable()
+var popNSeachI = function () {
+  dbSearchEnable()
   var make = $(this).val();
   console.log(make)
   console.log(modelNames);
   callmake(make, function (make) {
-    console.log(make)
-    popItems(selectModel, modelNames);
-    popItems(selectMin, price);
-    popItems(selectMax, price);
-    popItems(selectMaxY, years);
-    popItems(selectMinY, years);
+    console.log(modelNames)
+    popSearchS(selectModel, make);
+    popSearchS(selectMin, price);
+    popSearchS(selectMax, price);
+    popSearchS(selectMaxY, years);
+    popSearchS(selectMinY, years);
   });
 }
 /////////////////////////////
 function callmake(make, cb) {
+  console.log(make)
   $.ajax({
     url: "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/" + make + "?format=json",
     success: function (result) {
@@ -114,6 +115,7 @@ function callmake(make, cb) {
       }
       //console.log(modelNames);
       cb(modelNames);
+      console.log(modelNames);
     }
   })
 }
@@ -152,35 +154,7 @@ var refreshData = function () {
   API.getAll().then(function (data) {
   })
 };
-/////////////////////////////
-/*var handleFormSubmit = function (event) {
-  event.preventDefault();
-  console.log(newModel);
-  var newVehicle = {
-    vehicle: newType.val().trim(),
-    make: newMake.val().trim(),
-    model: newModel.val().trim(),
-    price: newPrice.val(),
-    description: newDescrpt.val().trim(),
-    year: newYear.val(),
-    //img needed to added
-  };
-  console.log(newVehicle)
-  if (!(newVehicle.vehicle && newVehicle.make && newVehicle.model)) {
-    alert("Enter information");
-    return;
-  }
 
-  API.saveOne(newVehicle).then(function () {
-  });
-  newType.val("");
-  newMake.val("");
-  newModel.val("");
-  newPrice.val("");
-  newDescrpt.val("");
-  newYear.val("");
-  newDescrpt.val("");
-};*/
 /////////////////////////////
 /////////////////////////////
 var searchDatabase = function () {
@@ -204,7 +178,7 @@ var searchDatabase = function () {
   }
 };
 ////////////////////////////
-function dropdownEnable() {
+function dbSearchEnable() {
   selectModel.prop("disabled", false)
   selectMinY.prop("disabled", false)
   selectMaxY.prop("disabled", false)
@@ -212,7 +186,7 @@ function dropdownEnable() {
   selectMax.prop("disabled", false)
 }
 /////////////////////////////
-$("#makeSelect1").on("change", optionMake, popnewItems)
+$("#makeSelect1").on("change", optionMake, popNSeachI)
 submitSearch.on("click", searchDatabase);
 
 /* eslint-enable camelcase */
