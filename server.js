@@ -1,11 +1,18 @@
 require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const path = require("path")
+const db = require("./models");
+const session = require("express-session");
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-var db = require("./models");
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+app.use(session({
+  secret:'fllipper',
+  resave:true,
+  saveUninitalized:true
+}))
 
 // Middleware
 app.use(express.urlencoded({
@@ -18,7 +25,7 @@ app.use(express.static("public"));
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main"
+    defaultLayout: "main",
   })
 );
 app.set("view engine", "handlebars");
@@ -38,11 +45,11 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
-// Starting the server, syncing our models ------------------------------------/
+// Starting the server, syncing our models -----------------------------------w-/
 db.sequelize.sync(syncOptions).then(function () {
   app.listen(PORT, function () {
     console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/autoflipper in your browser.",
       PORT,
       PORT
     );

@@ -1,0 +1,21 @@
+.desLabel{
+    display: block;
+}
+.rowSell{
+    height: 100px;
+    width: 50vh;
+}
+.formStyle{
+
+border: solid rgb(202, 195, 195);
+}
+.sellPrice{
+    display: block;
+    
+  }
+.submitSellRow{
+    width: 100%;
+    border-top: solid;
+    padding: 0 50%;
+}
+
