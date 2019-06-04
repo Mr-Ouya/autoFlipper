@@ -34,6 +34,9 @@ module.exports = function (sequelize, DataTypes) {
     img: {
       type: DataTypes.BLOB,
 
+    },
+    kilometers: {
+      type: DataTypes.INTEGER(225)
     }
 
 
