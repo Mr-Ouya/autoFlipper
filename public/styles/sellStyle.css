@@ -4,9 +4,15 @@
 .rowSell{
     height: 100px;
     width: 50vh;
+    margin: 0;
 }
-.formStyle{
+#typeDes{
+    width: 100%;
+}
 
+
+.formStyle{
+    padding: 0;
 border: solid rgb(202, 195, 195);
 }
 .sellPrice{
@@ -19,3 +25,27 @@ border: solid rgb(202, 195, 195);
     padding: 0 50%;
 }
 
+.btnSubmitSell{
+width: 40%;
+}
+.inputDataS{
+
+    margin: auto;
+}
+.holdImg{
+    height: auto;
+    width: auto;
+    text-align: center;
+    position: relative;
+    top: 35%;
+}
+.inputImgS{
+}
+.rowtextArea{
+
+    width: 100%;
+}
+.form-group{
+ width: 100%;
+
+}

@@ -148,7 +148,17 @@ module.exports = function (app) {
   app.post("/autoflipper/new_account", function (req, res) {
     var saltRounds = 10;
     console.log(req.body);
-    bcrypt.genSalt(saltRounds, function (err, salt) {
+    db.accounts.findAll({
+      where:{
+        email :req.body.email,
+        username :req.body.username
+      }
+    }).then(function(data){
+      console.log(data)
+      if (data.length > 1){
+        res.send("UserName or Email has already been used")
+      }else if (data.length < 1){
+       bcrypt.genSalt(saltRounds, function (err, salt) {
       console.log(req.body.password);
       if (err) throw err
 
@@ -160,10 +170,14 @@ module.exports = function (app) {
           password: hash
         }
         db.accounts.create(newaccount).then(function (data) {
-          res.redirect("/accountlogin")
+          res.redirect("/autoflipper/login")
         })
       })
+    }) 
+      }
     })
+
+    
   })
   app.post('/autoflipper/auth', function (request, response) {
     var username = request.body.username;
@@ -177,7 +191,7 @@ module.exports = function (app) {
         }
       }).then(function (results) {
         if (!results) {
-          res.send('No User Exist');
+          respond.send('No User Exist');
         } else {
           bcrypt.compare(password, results[0].dataValues.password, function (err, results) {
             if (err) throw err;
