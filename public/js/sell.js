@@ -35,39 +35,54 @@ var APISell = {
 $(document).ready(function () {
   selectSellModel.prop("disabled", true)
 })
+////////////////// ////////////////////////////
+ function selectNameState  (name) {
+  var optionS;
+      switch (name.val()){
+        case  "Make":
+         optionS = "Make";
+          break;
+        case "Model":
+            optionS = "Model";
+            break;
+        case "Year":
+            optionS = "Year";
+            break;
+        case "Year":
+            optionS = "Price";
+            break;   
+      }
 
+}
+function addOptions(data, selection){
+  var newSelect = $("<option></option").text(data);
+  newSelect.val(data);
+  newSelect.addClass("newoptions");
+  newSelect.data(data);
+  newSelect.onclick = popnewItems;
+  selection.append(newSelect);
+}
+///////////////////////////////////////////////////////////////////////
 popFirstItem(selectSellMake, popularVehicle);
 function popFirstItem(select, data) {
-  console.log(select);
   var firstdrop = select;
   for (var i = 0; i < data.length; i++) {
-    var newSelect = $("<option></option").text(data[i]);
-    newSelect.val(data[i]);
-    newSelect.addClass("newoptions");
-    newSelect.data(data[i]);
-    newSelect.onclick = popnewItems;
-    firstdrop.append(newSelect);
+   addOptions(data[i], firstdrop)
   }
 }
 /////////////////////////////
 function popItems(select, data) {
-  select.empty();
+ select.empty();
   var firstdrop = select;
   if (firstdrop === selectSellModel) {
     firstdrop.not(".newoptions");
   }
   for (var i = 0; i < data.length; i++) {
-    var newSelect = $("<option></option").text(data[i]);
-    newSelect.val(data[i]);
-    newSelect.addClass("newoptions");
-    newSelect.data(data[i]);
-    newSelect.onclick = popnewItems;
-    firstdrop.append(newSelect);
+    addOptions(data[i], firstdrop)
   }
 }
 /////////////////////////////
 var popnewItems = function () {
-
   console.log()
   dropdownEnable()
   var make = $(this).val();
@@ -111,13 +126,9 @@ var handleFormSubmit = function (event) {
   }
   APISell.saveOne(newVehicle).then(function () {
   });
-  newType.val("");
-  newMake.val("");
-  newModel.val("");
-  newPrice.val("");
-  newDescrpt.val("");
-  newYear.val("");
-  newDescrpt.val("");
+
+   inputPrice.val("");
+ inputDescrpt.val("");
 };
 /////////////////////////////
 /////////////////////////////

@@ -1,108 +1,98 @@
+<div class="wrapper">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Auto Flipper</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="/autoflipper">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/autoflipper"><p class="navbarPortals navBar-Title">Autoflipper</p> <span class="sr-only">(current)</span></a>
       </li>
-        <a class="nav-link" href="/autoflipper/login">Login/Register</a>
+      <a class="nav-link" href="/autoflipper/login"><p class="navbarPortals">Login/Register</p></a>
       </li>
       <li>
-        <a class="nav-link" href="/autoflipper/sell-your-vehicle">Sell your Vehicle</a>
+        <a class="nav-link" href="/autoflipper/sell-your-vehicle"><p class="navbarPortals">Sell Your Vehicle</p></a>
       </li>
     </ul>
   </div>
 </nav>
-
-<div class="row titleDiv">
-  <title>Auto Flipper</title>
-</div>
-<h1 class="titleS">Auto Flipper</h1>
-
-
-
-
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="sizing"></div>
-      <div class="container">
-        <div class="container searchDiv">
-        <div class="search">
-          <p class="searchText">Search</p>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="yearSN" class="nameSearch">Make</label>
-                <select class="form-control" id="makeSelect1">
-                  <option selected>Make</option>
-                </select>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="yearSM" class="nameSearch">Model</label>
-                <select class="form-control" id="modelSelect1">
-                  <option selected>Model</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="form-group">
-                <label for="yearSMin" class="nameSearch">Year</label>
-                <select class="form-control" id="yearminSelect1">
-                  <option selected>Year</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="form-group">
-                <label for="yearSMax" class="nameSearch">Year</label>
-                <select class="form-control" id="yearmaxSelect1">
-                  <option selected>Year</option>
-                </select>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="yearSMin" class="nameSearch">Price</label>
-                <select class="form-control" id="minSelect1">
-                  <option selected>Price</option>
-                </select>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="yearSMax" class="nameSearch">Price</label>
-                <select class="form-control" id="maxSelect1">
-                  <option selected>Price</option>
-              </div>
-            </div>
+<div class="container content">
+  <div class=" row titleDiv">
+    <h1 class="titleS">Auto Flipper</h1>
+  </div>
+ <div class="row searchDiv">
+    <div class="search ">
+      <p class="searchText">Search</p>
+      <div class="row searchColumns">
+        <div class="col">
+          <div class="form-group">
+            <label for="yearSN" class="nameSearch">Make</label>
+            <select class="form-control" id="makeSelect1">
+              <option selected>Make</option>
+            </select>
           </div>
-      </div>     
-    </div>  
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="yearSM" class="nameSearch">Model</label>
+            <select class="form-control" id="modelSelect1">
+              <option selected>Model</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="yearSMin" class="nameSearch">Year</label>
+            <select class="form-control" id="yearminSelect1">
+              <option selected>Year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="yearSMax" class="nameSearch">Year</label>
+            <select class="form-control" id="yearmaxSelect1">
+              <option selected>Year</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="yearSMin" class="nameSearch">Price</label>
+            <select class="form-control" id="minSelect1">
+              <option selected>Price</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="yearSMax" class="nameSearch">Price</label>
+            <select class="form-control" id="maxSelect1">
+              <option selected>Price</option>
+              </select>
+          </div>
+        </div>
       </div>
-       <div class="row btnSubmit">
-            <input type="submit" class="btn btn-primary btn-lg" id="submitSearch">
-          </div>
+ <div class="row btnSubmit">
+   <div class="posBtnSearch">   
+      <input type="submit" class="btn btn-primary btn-lg btnSubMit" id="submitSearch">
+</div>
+  </div>
     </div>
   </div>
-<div class="container resultsBox">   
-   <h3>Results </h3>
-  <div class="row results">
-  </div>
+ <span> <h3>Results </h3></span>
 
-
-  {{> search}}
-
+<div class="container resultsBox">
+<div class="row resultStyle">
+    {{> search}}
 </div>
 </div>
 
+</div>
+  <div class="footer"></div>
 
+</div>
