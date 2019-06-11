@@ -22,11 +22,14 @@ border: solid rgb(202, 195, 195);
 .submitSellRow{
     width: 100%;
     border-top: solid;
-    padding: 0 50%;
+    padding: 0 30%;
+    justify-content: center;
 }
 
 .btnSubmitSell{
-width: 40%;
+    width: 100%;
+    background: white;
+
 }
 .inputDataS{
 
@@ -48,4 +51,12 @@ width: 40%;
 .form-group{
  width: 100%;
 
+}
+.imgWrapper{
+    height: 50%;
+
+}
+.upLoadImg{
+    height: 50%;
+    padding: 15%;
 }
